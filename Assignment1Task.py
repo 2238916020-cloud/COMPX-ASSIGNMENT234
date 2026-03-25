@@ -29,6 +29,9 @@ class Assignment1:
             self.mThreads.append(thread)
         # Start all the threads
         # Write code here
+        for i in range(1, self.NUM_PRINTERS + 1):
+            thread = self.printerThread(i, self)
+            self.pThreads.append(thread)
 
         # Let the simulation run for some time
         time.sleep(self.SIMULATION_TIME)
