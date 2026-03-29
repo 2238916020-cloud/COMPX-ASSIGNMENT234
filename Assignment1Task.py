@@ -72,6 +72,7 @@ class Assignment1:
                 # Grab the request at the head of the queue and print it
                 # Write code here
                 self.printDox(self.printerID)
+                self.outer.not_full.notify()
 
         def printerSleep(self):
             sleepSeconds = random.randint(1, self.outer.MAX_PRINTER_SLEEP)
