@@ -113,3 +113,4 @@ class Assignment1:
                     self.outer.print_list.queueInsert(doc)
             # Insert it in the print queue
             self.outer.print_list.queueInsert(doc)
+            self.outer.not_empty.notify()
