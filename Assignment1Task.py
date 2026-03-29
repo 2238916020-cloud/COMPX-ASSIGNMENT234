@@ -64,6 +64,11 @@ class Assignment1:
             while self.outer.sim_active:
                 # Simulate printer taking some time to print the document
                 self.printerSleep()
+                with self.outer.queue_lock:
+                    while self.outer.print_list.size == 0 and self.outer.sim_active:
+                        self.outer.not_empty.wait()
+                    if self.outer.sim_active:
+                        self.printDox(self.printerID)
                 # Grab the request at the head of the queue and print it
                 # Write code here
                 self.printDox(self.printerID)
