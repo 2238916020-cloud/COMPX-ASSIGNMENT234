@@ -41,6 +41,10 @@ class Assignment1:
 
         # Finish simulation
         self.sim_active = False
+        with self.queue_lock:
+            self.not_full.notify_all()
+            self.not_empty.notify_all()
+
 
         # Wait until all printer threads finish by joining them
         # Write code here
