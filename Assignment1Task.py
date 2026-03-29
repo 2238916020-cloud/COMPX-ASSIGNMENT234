@@ -106,5 +106,10 @@ class Assignment1:
             print(f"Machine {id} Sent a print request")
             # Build a print document
             doc = printDoc(f"My name is machine {id}", id)
+            with self.outer.queue_lock:
+                while self.outer.print_list.size >= self.outer.QUEUE_CAPACITY and self.outer.sim_active:
+                    self.outer.not_full.wait()
+                if self.outer.sim_active:
+                    self.outer.print_list.queueInsert(doc)
             # Insert it in the print queue
             self.outer.print_list.queueInsert(doc)
